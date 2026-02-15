@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nemo's Project Board</title>
+    <link rel="stylesheet" href="board.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="board-container">
+        <header class="board-header">
+            <div class="header-left">
+                <span class="logo">🐙</span>
+                <div class="header-title">
+                    <h1>Nemo's Board</h1>
+                    <p>Project & Task Management</p>
+                </div>
+            </div>
+            <div class="header-stats">
+                <div class="stat">
+                    <span class="stat-value" id="total-tasks">0</span>
+                    <span class="stat-label">Tasks</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="in-progress">0</span>
+                    <span class="stat-label">In Progress</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="completed">0</span>
+                    <span class="stat-label">Done</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="board-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="high">🔥 High Priority</button>
+            <button class="filter-btn" data-filter="bug">🐛 Bugs</button>
+            <button class="filter-btn" data-filter="feature">✨ Features</button>
+            <input type="text" class="search-input" placeholder="Search tasks..." id="search">
+        </div>
+
+        <div class="board-columns">
+            <!-- Backlog Column -->
+            <div class="column" data-status="backlog">
+                <div class="column-header">
+                    <span class="column-title">📋 Backlog</span>
+                    <span class="column-count" id="count-backlog">0</span>
+                </div>
+                <div class="column-content" id="backlog">
+                    <!-- Tasks will be loaded here -->
+                </div>
+                <button class="add-task-btn" onclick="showAddTask('backlog')">+ Add Task</button>
+            </div>
+
+            <!-- Todo Column -->
+            <div class="column" data-status="todo">
+                <div class="column-header">
+                    <span class="column-title">📝 To Do</span>
+                    <span class="column-count" id="count-todo">0</span>
+                </div>
+                <div class="column-content" id="todo">
+                    <!-- Tasks will be loaded here -->
+                </div>
+                <button class="add-task-btn" onclick="showAddTask('todo')">+ Add Task</button>
+            </div>
+
+            <!-- In Progress Column -->
+            <div class="column" data-status="in-progress">
+                <div class="column-header">
+                    <span class="column-title">🔨 In Progress</span>
+                    <span class="column-count" id="count-in-progress">0</span>
+                </div>
+                <div class="column-content" id="in-progress">
+                    <!-- Tasks will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Review Column -->
+            <div class="column" data-status="review">
+                <div class="column-header">
+                    <span class="column-title">👀 Review</span>
+                    <span class="column-count" id="count-review">0</span>
+                </div>
+                <div class="column-content" id="review">
+                    <!-- Tasks will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Done Column -->
+            <div class="column" data-status="done">
+                <div class="column-header">
+                    <span class="column-title">✅ Done</span>
+                    <span class="column-count" id="count-done">0</span>
+                </div>
+                <div class="column-content" id="done">
+                    <!-- Tasks will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Task Modal -->
+    <div id="add-task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="hideAddTask()">&times;</span>
+            <h2>Add New Task</h2>
+            <form id="add-task-form">
+                <input type="hidden" id="task-status" value="backlog">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="task-title" required placeholder="Task title...">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="task-description" rows="3" placeholder="Description..."></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Type</label>
+                        <select id="task-type">
+                            <option value="feature">✨ Feature</option>
+                            <option value="bug">🐛 Bug</option>
+                            <option value="refactor">🔄 Refactor</option>
+                            <option value="docs">📝 Documentation</option>
+                            <option value="research">🔍 Research</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Priority</label>
+                        <select id="task-priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">🔥 High</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Project</label>
+                    <select id="task-project">
+                        <option value="">No project</option>
+                        <option value="surebet-detector">Surebet Detector</option>
+                        <option value="portfolio">Portfolio</option>
+                        <option value="dashboard">Dashboard</option>
+                        <option value="booking-system">Booking System</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit">Add Task</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="board.js"></script>
+</body>
+</html>
